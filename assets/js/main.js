@@ -93,7 +93,7 @@ window.open(link,"_blank")
 		$window.on('load', function() {
 			window.setTimeout(function() {
 				$body.removeClass('is-preload');
-			}, 100);
+			}, 90);
 		});
 
 	// Tweaks/fixes.
