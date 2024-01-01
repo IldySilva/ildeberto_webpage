@@ -1690,6 +1690,7 @@ button.icon.circle:before,
 	text-indent: 0;
 }
 
+
 input[type="submit"].icon.circle.fa-angle-left:before,
 input[type="reset"].icon.circle.fa-angle-left:before,
 input[type="button"].icon.circle.fa-angle-left:before,
@@ -2733,7 +2734,7 @@ button:disabled,
 	width: 27.5%;
 }
 
-.panel.small .span-3,
+
 .panel.medium .span-3,
 .panel.large .span-3 {
 	width: 30%;
@@ -3636,6 +3637,16 @@ button:disabled,
 		-ms-flex-basis: auto;
 		flex-basis: auto;
 	}
+
+	
+.firstbutton{
+
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
 
 	.panel.banner .image {
 		-moz-flex-basis: auto;
