@@ -1,0 +1,32 @@
+{
+  "journey": [
+
+    {
+      "company": "TIS",
+      "role": "Principal Mobile Engineer",
+      "period": "2024-Present"
+    },
+
+    {
+      "company": "Equilibrium SA",
+      "role": "Mobile Engineer (Hybrid)",
+      "period": "2024-2025"
+    },
+    {
+      "company": "IS4-Solutions",
+      "role": "Mobile & Backend Developer",
+      "period": "2022-2024"
+    },
+    {
+      "company": "KiamiSoft",
+      "role": "Frontend developer",
+      "period": "2022"
+    },
+    {
+      "company": "INOKRI",
+      "role": "Mobile Developer | Ui Designer",
+      "period": "2021-2022"
+    }
+
+  ]
+}
