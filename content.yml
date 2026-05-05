@@ -1,0 +1,84 @@
+hero:
+  bio: >
+    I like to build <strong>developer tools</strong>, <strong>SDKs</strong>, and contribute to <strong>open source</strong>.<br/>
+    Engineering  at <strong>TIS</strong>, previously <strong>Equilibrium</strong> and <strong>Invovflow</strong>.
+  socials:
+    - label: GitHub
+      url: https://github.com/ildysilva
+    - label: LinkedIn
+      url: https://www.linkedin.com/in/ildeberto-vasconcelos-1522a91bb/
+    - label: Email
+      url: mailto:ildeberto34@gmail.com
+    - label: WhatsApp
+      url: https://wa.link/o9wcx9
+
+projects:
+  - name: CastBrick
+    url: https://castbrick.co
+    description: Email & SMS API for developers — founder project
+    tags: [APIs, DX, Docker]
+  - name: NexaCTF
+    url: https://nexactf.com
+    description: Capture The Flag platform focused on cybersecurity challenges — founder project
+    tags: [Security, Performance]
+  - name: IziPay
+    url: https://izipay.ao
+    description: Local payment gateway and payment facilitation platform
+    tags: [Flutter, APIs]
+  - name: Simplifica
+    url: https://simplifica.gov.ao
+    description: Government initiative to simplify processes across public institutions
+    tags: [Flutter, Web]
+  - name: Open Source — dart-lang & flutter
+    url: https://github.com/dart-lang/site-www
+    description: Contributor to dart-lang/site-www, dart-lang/sdk, and flutter/flutter
+    tags: [Dart, Flutter, Open Source]
+  - name: Njila Yetu
+    url: ""
+    description: Mobile app connecting Angolan communities
+    tags: [Flutter, Figma]
+  - name: Socia
+    url: ""
+    description: Social platform mobile app
+    tags: [Flutter]
+
+articles:
+  see_more: https://ildysilva.medium.com
+  items:
+    - title: What are Flutter and Dart Extension Types?
+      url: https://ildysilva.medium.com/what-are-flutter-and-dart-extension-types-896eda0a3ddf
+    - title: "The Builder Pattern in Dart: Simplifying Complex Object Creation"
+      url: https://ildysilva.medium.com/the-builder-pattern-in-dart-simplifying-the-creation-of-complex-objects-78f96ebe1eb3
+    - title: "Memento Pattern: Preserving Application State"
+      url: https://ildysilva.medium.com/memento-pattern-preserving-application-state-e7174f605354
+
+videos:
+  see_more: ""
+  items:
+    - title: ""
+      url: ""
+
+education:
+  - degree: BSc in Computer Science
+    institution: AIEC
+    period: "2022–2025"
+
+languages:
+  - English (Proficient)
+  - Portuguese (Native)
+
+skills:
+  - label: Flutter & Dart
+    details: State management (BLoC, MVVM), performance optimization, async programming, cross-platform
+  - label: Mobile
+    details: Android (Kotlin), iOS (Swift, SwiftUI), native integrations, App Store Connect, Play Console
+  - label: Architecture & SDKs
+    details: Modular architectures, SDK design, reusable component libraries, offline-first systems
+  - label: Backend & APIs
+    details: RESTful APIs, WebSockets, AdonisJS, .NET (C#), Firebase
+  - label: Developer Tools & DX
+    details: Internal SDKs, documentation, CI/CD, feature flags, analytics
+  - label: Systems & DevOps
+    details: Git, GitHub, GitLab, Docker, Linux
+  - label: Testing & Quality
+    details: Unit tests, integration tests, profiling, code review
