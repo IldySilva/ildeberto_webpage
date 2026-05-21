@@ -78,6 +78,9 @@
 
 	</div>
 
+	<!-- Theme toggle -->
+	<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀</button>
+
 	<!-- Stack drawer -->
 	<button class="stack-btn" id="stack-btn">Stack</button>
 	<div class="stack-overlay" id="stack-overlay"></div>
@@ -118,7 +121,7 @@
 		Shape.prototype.draw = function () {
 			ctx.save();
 			ctx.globalAlpha = this.alpha;
-			ctx.strokeStyle = 'rgba(255,255,255,1)';
+			ctx.strokeStyle = document.body.classList.contains('light') ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)';
 			ctx.lineWidth = 1.5;
 			ctx.translate(this.x, this.y);
 			ctx.rotate(this.rot);
@@ -167,6 +170,21 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/main.js"></script>
 	<script src="assets/js/renderContent.js"></script>
+	<script>
+	(function () {
+		var btn = document.getElementById('theme-toggle');
+		var saved = localStorage.getItem('theme');
+		if (saved === 'light') {
+			document.body.classList.add('light');
+			btn.textContent = '🌙';
+		}
+		btn.addEventListener('click', function () {
+			var isLight = document.body.classList.toggle('light');
+			btn.textContent = isLight ? '🌙' : '☀';
+			localStorage.setItem('theme', isLight ? 'light' : 'dark');
+		});
+	})();
+	</script>
 
 </body>
 
