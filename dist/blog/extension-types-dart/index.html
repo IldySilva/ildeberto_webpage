@@ -1,0 +1,85 @@
+<!DOCTYPE html><html> <head><title>Extension Types in Dart 3.3 — Ildeberto</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><meta name="author" content="Ildeberto Vasconcelos"><meta name="keywords" content="Flutter, Mobile, Programmer, Developer, Software Flutter Developer"><meta name="description" content="Zero-cost wrappers that bring type safety without runtime overhead."><link rel="icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="/assets/css/main.css"><script src="https://kit.fontawesome.com/a6bb187d37.js" crossorigin="anonymous"></script><noscript><link rel="stylesheet" href="/assets/css/noscript.css"></noscript></head> <body class="is-preload">  <canvas id="bg-canvas"></canvas> <div id="page-wrapper"> <div id="wrapper"> <section class="panel banner right"> <div class="content color0 span-4-25"> <a href="/" class="back-link">&larr; Home</a> <a href="/blog" class="back-link" style="margin-top:0.4rem">&larr; Blog</a> </div> </section> <section class="panel"> <div class="inner blog-post-content"> <p class="post-meta">1 May 2024<span class="post-tags">Dart, Flutter, Type Safety</span></p> <h1 class="major">Extension Types in Dart 3.3</h1>  <p>Dart 3.3 introduced <strong>extension types</strong> — a way to wrap an existing type and give it a
+different interface, with zero runtime overhead.</p>
+<h2 id="why-they-matter">Why they matter</h2>
+<p>Before extension types, a common pattern was:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">typedef</span><span style="color:#79B8FF"> UserId</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> String</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">typedef</span><span style="color:#79B8FF"> ProductId</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> String</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> fetchUser</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">UserId</span><span style="color:#E1E4E8"> id) { ... }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Nothing stops this mistake:</span></span>
+<span class="line"><span style="color:#B392F0">fetchUser</span><span style="color:#E1E4E8">(productId); </span><span style="color:#6A737D">// compiles fine</span></span></code></pre>
+<p>Both <code>UserId</code> and <code>ProductId</code> are just <code>String</code> at runtime. The compiler can’t help.</p>
+<h2 id="extension-types-to-the-rescue">Extension types to the rescue</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">extension type</span><span style="color:#79B8FF"> UserId</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">String</span><span style="color:#E1E4E8"> value) {}</span></span>
+<span class="line"><span style="color:#F97583">extension type</span><span style="color:#79B8FF"> ProductId</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">String</span><span style="color:#E1E4E8"> value) {}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> fetchUser</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">UserId</span><span style="color:#E1E4E8"> id) { ... }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">fetchUser</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">ProductId</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&#39;123&#39;</span><span style="color:#E1E4E8">)); </span><span style="color:#6A737D">// compile error!</span></span></code></pre>
+<p>Now the compiler enforces the distinction. At runtime, it’s still just a <code>String</code> — no
+wrapper object, no allocation, no overhead.</p>
+<h2 id="implementing-interfaces">Implementing interfaces</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">extension type</span><span style="color:#79B8FF"> Celsius</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">double</span><span style="color:#E1E4E8"> value) </span><span style="color:#F97583">implements</span><span style="color:#79B8FF"> double</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  Celsius</span><span style="color:#F97583"> operator</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Celsius</span><span style="color:#E1E4E8"> other) </span><span style="color:#F97583">=&gt;</span><span style="color:#79B8FF"> Celsius</span><span style="color:#E1E4E8">(value </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> other.value);</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#79B8FF">  Fahrenheit</span><span style="color:#B392F0"> toFahrenheit</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">=&gt;</span><span style="color:#79B8FF"> Fahrenheit</span><span style="color:#E1E4E8">(value </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> 9</span><span style="color:#F97583"> /</span><span style="color:#79B8FF"> 5</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 32</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">extension type</span><span style="color:#79B8FF"> Fahrenheit</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">double</span><span style="color:#E1E4E8"> value) </span><span style="color:#F97583">implements</span><span style="color:#79B8FF"> double</span><span style="color:#E1E4E8"> {}</span></span></code></pre>
+<h2 id="when-to-use-them">When to use them</h2>
+<ul>
+<li>Domain identifiers (<code>UserId</code>, <code>OrderId</code>, <code>Email</code>)</li>
+<li>Unit types (<code>Meters</code>, <code>Kilograms</code>, <code>Seconds</code>)</li>
+<li>Restricted views of existing types (expose only a subset of <code>List</code> methods)</li>
+</ul>
+<p>Extension types are a lightweight alternative to full wrapper classes when you only need
+type safety, not behavioural extension.</p>  </div> </section> <div class="copyright">&copy; Ildeberto Silva.</div> </div> </div> <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀</button> <script>
+    (function () {
+      const canvas = document.getElementById('bg-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, shapes;
+      function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+      function Shape() { this.reset(true); }
+      Shape.prototype.reset = function (initial) {
+        this.x = Math.random() * W;
+        this.y = initial ? Math.random() * H : (Math.random() < 0.5 ? -120 : H + 120);
+        this.r = 40 + Math.random() * 120;
+        this.vx = (Math.random() - 0.5) * 0.18;
+        this.vy = (Math.random() - 0.5) * 0.18;
+        this.alpha = 0.12 + Math.random() * 0.18;
+        this.type = Math.random() < 0.5 ? 'circle' : 'rect';
+        this.rot = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.002;
+      };
+      Shape.prototype.draw = function () {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.strokeStyle = document.body.classList.contains('light') ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)';
+        ctx.lineWidth = 1.5;
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rot);
+        if (this.type === 'circle') { ctx.beginPath(); ctx.arc(0, 0, this.r, 0, Math.PI * 2); ctx.stroke(); }
+        else { ctx.strokeRect(-this.r / 2, -this.r / 2, this.r, this.r); }
+        ctx.restore();
+      };
+      Shape.prototype.update = function () {
+        this.x += this.vx; this.y += this.vy; this.rot += this.rotSpeed;
+        if (this.x < -200 || this.x > W + 200 || this.y < -200 || this.y > H + 200) this.reset(false);
+      };
+      function init() { resize(); shapes = Array.from({ length: 18 }, function () { return new Shape(); }); }
+      function loop() { ctx.clearRect(0, 0, W, H); shapes.forEach(function (s) { s.update(); s.draw(); }); requestAnimationFrame(loop); }
+      window.addEventListener('resize', resize);
+      init(); loop();
+    })();
+    (function () {
+      const btn = document.getElementById('theme-toggle');
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') { document.body.classList.add('light'); btn.textContent = '🌙'; }
+      btn.addEventListener('click', function () {
+        const isLight = document.body.classList.toggle('light');
+        btn.textContent = isLight ? '🌙' : '☀';
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      });
+    })();
+  </script>  <script src="/assets/js/jquery.min.js"></script> <script src="/assets/js/browser.min.js"></script> <script src="/assets/js/breakpoints.min.js"></script> <script src="/assets/js/main.js"></script> </body> </html>

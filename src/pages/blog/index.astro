@@ -1,0 +1,99 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Blog — Ildeberto" description="Writing on Dart, Flutter, and software engineering.">
+  <canvas id="bg-canvas"></canvas>
+
+  <div id="page-wrapper">
+    <div id="wrapper">
+      <section class="panel banner right">
+        <div class="content color0 span-4-25">
+          <a href="/" class="back-link">&larr; Home</a>
+          <h1 class="major" style="margin-top:1.5rem">Writing</h1>
+          <p>Notes on Dart, Flutter, and software engineering.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="inner">
+          <ul class="blog-list">
+            {posts.map((post) => (
+              <li class="blog-list__item">
+                <a href={`/blog/${post.id}`} class="blog-list__title">{post.data.title}</a>
+                <div class="blog-list__meta">
+                  <span>{post.data.date.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                  {post.data.tags.length > 0 && (
+                    <span class="post-tags">{post.data.tags.join(', ')}</span>
+                  )}
+                </div>
+                {post.data.description && (
+                  <p class="blog-list__desc">{post.data.description}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <div class="copyright">&copy; Ildeberto Silva.</div>
+    </div>
+  </div>
+
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀</button>
+
+  <script is:inline>
+    (function () {
+      const canvas = document.getElementById('bg-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, shapes;
+      function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+      function Shape() { this.reset(true); }
+      Shape.prototype.reset = function (initial) {
+        this.x = Math.random() * W;
+        this.y = initial ? Math.random() * H : (Math.random() < 0.5 ? -120 : H + 120);
+        this.r = 40 + Math.random() * 120;
+        this.vx = (Math.random() - 0.5) * 0.18;
+        this.vy = (Math.random() - 0.5) * 0.18;
+        this.alpha = 0.12 + Math.random() * 0.18;
+        this.type = Math.random() < 0.5 ? 'circle' : 'rect';
+        this.rot = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.002;
+      };
+      Shape.prototype.draw = function () {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.strokeStyle = document.body.classList.contains('light') ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)';
+        ctx.lineWidth = 1.5;
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rot);
+        if (this.type === 'circle') { ctx.beginPath(); ctx.arc(0, 0, this.r, 0, Math.PI * 2); ctx.stroke(); }
+        else { ctx.strokeRect(-this.r / 2, -this.r / 2, this.r, this.r); }
+        ctx.restore();
+      };
+      Shape.prototype.update = function () {
+        this.x += this.vx; this.y += this.vy; this.rot += this.rotSpeed;
+        if (this.x < -200 || this.x > W + 200 || this.y < -200 || this.y > H + 200) this.reset(false);
+      };
+      function init() { resize(); shapes = Array.from({ length: 18 }, function () { return new Shape(); }); }
+      function loop() { ctx.clearRect(0, 0, W, H); shapes.forEach(function (s) { s.update(); s.draw(); }); requestAnimationFrame(loop); }
+      window.addEventListener('resize', resize);
+      init(); loop();
+    })();
+    (function () {
+      const btn = document.getElementById('theme-toggle');
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') { document.body.classList.add('light'); btn.textContent = '🌙'; }
+      btn.addEventListener('click', function () {
+        const isLight = document.body.classList.toggle('light');
+        btn.textContent = isLight ? '🌙' : '☀';
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      });
+    })();
+  </script>
+</BaseLayout>

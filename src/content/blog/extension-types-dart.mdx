@@ -1,0 +1,60 @@
+---
+title: "Extension Types in Dart 3.3"
+description: "Zero-cost wrappers that bring type safety without runtime overhead."
+date: 2024-05-01
+tags: ["Dart", "Flutter", "Type Safety"]
+---
+
+Dart 3.3 introduced **extension types** — a way to wrap an existing type and give it a
+different interface, with zero runtime overhead.
+
+## Why they matter
+
+Before extension types, a common pattern was:
+
+```dart
+typedef UserId = String;
+typedef ProductId = String;
+
+void fetchUser(UserId id) { ... }
+
+// Nothing stops this mistake:
+fetchUser(productId); // compiles fine
+```
+
+Both `UserId` and `ProductId` are just `String` at runtime. The compiler can't help.
+
+## Extension types to the rescue
+
+```dart
+extension type UserId(String value) {}
+extension type ProductId(String value) {}
+
+void fetchUser(UserId id) { ... }
+
+fetchUser(ProductId('123')); // compile error!
+```
+
+Now the compiler enforces the distinction. At runtime, it's still just a `String` — no
+wrapper object, no allocation, no overhead.
+
+## Implementing interfaces
+
+```dart
+extension type Celsius(double value) implements double {
+  Celsius operator +(Celsius other) => Celsius(value + other.value);
+  
+  Fahrenheit toFahrenheit() => Fahrenheit(value * 9 / 5 + 32);
+}
+
+extension type Fahrenheit(double value) implements double {}
+```
+
+## When to use them
+
+- Domain identifiers (`UserId`, `OrderId`, `Email`)
+- Unit types (`Meters`, `Kilograms`, `Seconds`)
+- Restricted views of existing types (expose only a subset of `List` methods)
+
+Extension types are a lightweight alternative to full wrapper classes when you only need
+type safety, not behavioural extension.

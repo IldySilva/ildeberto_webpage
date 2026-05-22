@@ -1,0 +1,85 @@
+<!DOCTYPE html><html> <head><title>The Builder Pattern in Dart — Ildeberto</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><meta name="author" content="Ildeberto Vasconcelos"><meta name="keywords" content="Flutter, Mobile, Programmer, Developer, Software Flutter Developer"><meta name="description" content="How to simplify complex object creation in Dart using the Builder pattern."><link rel="icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="/assets/css/main.css"><script src="https://kit.fontawesome.com/a6bb187d37.js" crossorigin="anonymous"></script><noscript><link rel="stylesheet" href="/assets/css/noscript.css"></noscript></head> <body class="is-preload">  <canvas id="bg-canvas"></canvas> <div id="page-wrapper"> <div id="wrapper"> <section class="panel banner right"> <div class="content color0 span-4-25"> <a href="/" class="back-link">&larr; Home</a> <a href="/blog" class="back-link" style="margin-top:0.4rem">&larr; Blog</a> </div> </section> <section class="panel"> <div class="inner blog-post-content"> <p class="post-meta">10 March 2024<span class="post-tags">Dart, Flutter, Patterns</span></p> <h1 class="major">The Builder Pattern in Dart</h1>  <p>The Builder pattern separates the construction of a complex object from its representation.
+It’s particularly useful in Dart when you have objects with many optional parameters.</p>
+<h2 id="the-problem">The problem</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">final</span><span style="color:#E1E4E8"> user </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> User</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  name</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> 'Ildeberto'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  age</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> 23</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  email</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> 'ildeberto34@gmail.com'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  role</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Role</span><span style="color:#E1E4E8">.admin,</span></span>
+<span class="line"><span style="color:#6A737D">  // ... 10 more optional fields</span></span>
+<span class="line"><span style="color:#E1E4E8">);</span></span></code></pre>
+<p>Constructors with many parameters become unreadable and error-prone.</p>
+<h2 id="the-solution">The solution</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> UserBuilder</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  String</span><span style="color:#E1E4E8"> _name </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> ''</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">  int</span><span style="color:#E1E4E8"> _age </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">  String</span><span style="color:#E1E4E8"> _email </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> ''</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">  Role</span><span style="color:#E1E4E8"> _role </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> Role</span><span style="color:#E1E4E8">.user;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">  UserBuilder</span><span style="color:#B392F0"> name</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">String</span><span style="color:#E1E4E8"> name) { _name </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> name; </span><span style="color:#F97583">return</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"><span style="color:#79B8FF">  UserBuilder</span><span style="color:#B392F0"> age</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">int</span><span style="color:#E1E4E8"> age) { _age </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> age; </span><span style="color:#F97583">return</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"><span style="color:#79B8FF">  UserBuilder</span><span style="color:#B392F0"> email</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">String</span><span style="color:#E1E4E8"> email) { _email </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> email; </span><span style="color:#F97583">return</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"><span style="color:#79B8FF">  UserBuilder</span><span style="color:#B392F0"> role</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Role</span><span style="color:#E1E4E8"> role) { _role </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> role; </span><span style="color:#F97583">return</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">  User</span><span style="color:#B392F0"> build</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">=></span><span style="color:#79B8FF"> User</span><span style="color:#E1E4E8">(name</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> _name, age</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> _age, email</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> _email, role</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> _role);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Usage becomes expressive and readable:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">final</span><span style="color:#E1E4E8"> user </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> UserBuilder</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">name</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Ildeberto'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">age</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">23</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">email</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'ildeberto34@gmail.com'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">role</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Role</span><span style="color:#E1E4E8">.admin)</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">();</span></span></code></pre>
+<h2 id="darts-copywith-alternative">Dart’s copyWith alternative</h2>
+<p>For immutable value objects, Dart’s <code>copyWith</code> pattern covers similar ground:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">final</span><span style="color:#E1E4E8"> updated </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> user.</span><span style="color:#B392F0">copyWith</span><span style="color:#E1E4E8">(role</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Role</span><span style="color:#E1E4E8">.admin);</span></span></code></pre>
+<p>Use the Builder pattern when construction involves validation logic or multi-step assembly.
+Use <code>copyWith</code> for simple immutable data classes.</p>  </div> </section> <div class="copyright">&copy; Ildeberto Silva.</div> </div> </div> <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀</button> <script>
+    (function () {
+      const canvas = document.getElementById('bg-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, shapes;
+      function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+      function Shape() { this.reset(true); }
+      Shape.prototype.reset = function (initial) {
+        this.x = Math.random() * W;
+        this.y = initial ? Math.random() * H : (Math.random() < 0.5 ? -120 : H + 120);
+        this.r = 40 + Math.random() * 120;
+        this.vx = (Math.random() - 0.5) * 0.18;
+        this.vy = (Math.random() - 0.5) * 0.18;
+        this.alpha = 0.12 + Math.random() * 0.18;
+        this.type = Math.random() < 0.5 ? 'circle' : 'rect';
+        this.rot = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.002;
+      };
+      Shape.prototype.draw = function () {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.strokeStyle = document.body.classList.contains('light') ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)';
+        ctx.lineWidth = 1.5;
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rot);
+        if (this.type === 'circle') { ctx.beginPath(); ctx.arc(0, 0, this.r, 0, Math.PI * 2); ctx.stroke(); }
+        else { ctx.strokeRect(-this.r / 2, -this.r / 2, this.r, this.r); }
+        ctx.restore();
+      };
+      Shape.prototype.update = function () {
+        this.x += this.vx; this.y += this.vy; this.rot += this.rotSpeed;
+        if (this.x < -200 || this.x > W + 200 || this.y < -200 || this.y > H + 200) this.reset(false);
+      };
+      function init() { resize(); shapes = Array.from({ length: 18 }, function () { return new Shape(); }); }
+      function loop() { ctx.clearRect(0, 0, W, H); shapes.forEach(function (s) { s.update(); s.draw(); }); requestAnimationFrame(loop); }
+      window.addEventListener('resize', resize);
+      init(); loop();
+    })();
+    (function () {
+      const btn = document.getElementById('theme-toggle');
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') { document.body.classList.add('light'); btn.textContent = '🌙'; }
+      btn.addEventListener('click', function () {
+        const isLight = document.body.classList.toggle('light');
+        btn.textContent = isLight ? '🌙' : '☀';
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      });
+    })();
+  </script>  <script src="/assets/js/jquery.min.js"></script> <script src="/assets/js/browser.min.js"></script> <script src="/assets/js/breakpoints.min.js"></script> <script src="/assets/js/main.js"></script> </body> </html>

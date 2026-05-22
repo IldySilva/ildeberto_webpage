@@ -1,0 +1,35 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Ildeberto Vasconcelos | Engineer',
+  description = 'Personal Page of Mobile Software Developer | Flutter Developer | Backend Developer | UI Designer',
+} = Astro.props;
+---
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>{title}</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="author" content="Ildeberto Vasconcelos" />
+  <meta name="keywords" content="Flutter, Mobile, Programmer, Developer, Software Flutter Developer" />
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <script is:inline src="https://kit.fontawesome.com/a6bb187d37.js" crossorigin="anonymous"></script>
+  <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+  <slot />
+
+  <script is:inline src="/assets/js/jquery.min.js"></script>
+  <script is:inline src="/assets/js/browser.min.js"></script>
+  <script is:inline src="/assets/js/breakpoints.min.js"></script>
+  <script is:inline src="/assets/js/main.js"></script>
+</body>
+</html>
