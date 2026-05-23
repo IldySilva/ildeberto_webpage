@@ -2425,7 +2425,7 @@ button:disabled,
 }
 
 .panel>.inner {
-	padding: 3.5rem 3.5rem 2rem 3.5rem;
+	padding: 5rem 4rem 4rem 4rem;
 	display: -moz-flex;
 	display: -webkit-flex;
 	display: -ms-flex;
@@ -4070,7 +4070,7 @@ body.is-preload #wrapper {
 
 .journey-list li,
 .project-list li {
-	padding: 0.6rem 0;
+	padding: 1rem 0;
 	border-bottom: solid 1px rgba(255, 255, 255, 0.08);
 	font-size: 0.95rem;
 	color: rgba(255, 255, 255, 0.8);
@@ -4088,7 +4088,7 @@ body.is-preload #wrapper {
 }
 
 .link-list li {
-	padding: 0.6rem 0;
+	padding: 1rem 0;
 	border-bottom: solid 1px rgba(255, 255, 255, 0.08);
 }
 
@@ -4549,18 +4549,27 @@ body.light .timeline__title .circle__dot {
 
 /* ── Blog ─────────────────────────────────────── */
 
+.post-nav {
+	margin-bottom: 2.5rem;
+}
+
 .back-link {
 	display: block;
-	font-size: 0.85rem;
-	opacity: 0.55;
+	font-size: 0.8rem;
+	opacity: 0.4;
 	text-decoration: none;
 	color: inherit;
 	letter-spacing: 0.05em;
-	margin-bottom: 1.5rem;
+	margin-bottom: 0.4rem;
 	transition: opacity 0.2s;
 }
 
 .back-link:hover { opacity: 1; }
+
+.blog-post-content.inner,
+.inner.blog-post-content {
+	padding-top: 2.5rem;
+}
 
 /* Blog list page */
 .blog-list {
@@ -4570,7 +4579,7 @@ body.light .timeline__title .circle__dot {
 }
 
 .blog-list__item {
-	padding: 1.4rem 0;
+	padding: 2rem 0;
 	border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
@@ -4603,20 +4612,109 @@ body.light .timeline__title .circle__dot {
 
 /* Blog post content */
 .blog-post-content {
+	/* no max-width here — let header span full panel */
+}
+
+.blog-post-content > h1,
+.blog-post-content > .post-clap,
+.blog-post-content > p,
+.blog-post-content > h2,
+.blog-post-content > h3,
+.blog-post-content > ul,
+.blog-post-content > ol,
+.blog-post-content > pre,
+.blog-post-content > blockquote {
 	max-width: 680px;
 }
 
 .post-meta {
-	font-size: 0.8rem;
-	opacity: 0.45;
-	margin-bottom: 1rem;
+	font-size: 0.78rem;
+	opacity: 0.4;
 	display: flex;
-	gap: 1rem;
 	align-items: center;
+	gap: 0.6rem;
+	margin: 0 0 1.5rem 0;
+	flex-shrink: 0;
+}
+
+.post-meta__views {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+}
+
+.post-meta__views i { font-size: 0.8em; }
+
+/* Tags — right side */
+.post-tag-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 0.35rem;
+}
+
+.post-tag-list li {
+	font-size: 0.7rem;
+	padding: 0.2em 0.6em;
+	border-radius: 99px;
+	border: 1px solid rgba(255,255,255,0.18);
+	opacity: 0.5;
+	letter-spacing: 0.03em;
+	white-space: nowrap;
+}
+
+/* Clap — Discord-style pill below the title */
+.post-clap {
+	display: inline-flex;
+	align-items: center;
+	margin-bottom: 2rem;
+}
+
+/* Lyket widget — dark theme (default) */
+.post-clap button,
+.post-clap [class*="lyket"] {
+	background: transparent !important;
+	color: rgba(255,255,255,0.75) !important;
+	border-color: rgba(255,255,255,0.2) !important;
+	box-shadow: none !important;
+}
+
+.post-clap button:hover,
+.post-clap [class*="lyket"]:hover {
+	color: #fff !important;
+	border-color: rgba(255,255,255,0.5) !important;
+}
+
+/* View counter — dark theme */
+.post-meta__views [class*="lyket"],
+.blog-list__meta [class*="lyket"] {
+	color: inherit !important;
+	background: transparent !important;
+}
+
+/* Lyket widget — light theme */
+body.light .post-clap button,
+body.light .post-clap [class*="lyket"] {
+	color: rgba(0,0,0,0.6) !important;
+	border-color: rgba(0,0,0,0.2) !important;
+}
+
+body.light .post-clap button:hover,
+body.light .post-clap [class*="lyket"]:hover {
+	color: rgba(0,0,0,0.9) !important;
+	border-color: rgba(0,0,0,0.4) !important;
+}
+
+body.light .post-meta__views [class*="lyket"],
+body.light .blog-list__meta [class*="lyket"] {
+	color: inherit !important;
 }
 
 .blog-post-content h1.major {
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
 }
 
 .blog-post-content h2 {
@@ -4634,8 +4732,8 @@ body.light .timeline__title .circle__dot {
 }
 
 .blog-post-content p {
-	line-height: 1.75;
-	margin-bottom: 1rem;
+	line-height: 1.85;
+	margin-bottom: 1.4rem;
 	opacity: 0.82;
 }
 
@@ -4702,4 +4800,19 @@ body.light .blog-post-content :not(pre) > code {
 
 body.light .blog-post-content blockquote {
 	border-left-color: rgba(0,0,0,0.2);
+}
+
+body.light .post-tag-list li {
+	border-color: rgba(0,0,0,0.15);
+}
+
+body.light .post-clap lyket-button,
+body.light .post-clap .lyket-btn {
+	border-color: rgba(0,0,0,0.18);
+	color: inherit;
+}
+
+body.light .post-clap lyket-button:hover,
+body.light .post-clap .lyket-btn:hover {
+	border-color: rgba(0,0,0,0.4);
 }

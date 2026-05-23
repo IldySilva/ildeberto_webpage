@@ -58,6 +58,23 @@ const blogPosts = (await getCollection('blog'))
         </div>
       </section>
 
+      <!-- Articles (Medium) -->
+      {articles.length > 0 && (
+        <section class="panel">
+          <div class="inner">
+            <h2 class="major">Articles</h2>
+            <ul class="link-list">
+              {articles.map((a: any) => (
+                <li><a href={a.url} target="_blank" rel="noopener">{a.title}</a></li>
+              ))}
+            </ul>
+            {articlesSeeMore && (
+              <a href={articlesSeeMore} target="_blank" rel="noopener" class="see-more-link">See more &rarr;</a>
+            )}
+          </div>
+        </section>
+      )}
+
       <!-- Blog posts -->
       {blogPosts.length > 0 && (
         <section class="panel">
@@ -74,23 +91,6 @@ const blogPosts = (await getCollection('blog'))
               ))}
             </ul>
             <a href="/blog" class="see-more-link">All posts &rarr;</a>
-          </div>
-        </section>
-      )}
-
-      <!-- Articles (Medium) -->
-      {articles.length > 0 && (
-        <section class="panel">
-          <div class="inner">
-            <h2 class="major">Articles</h2>
-            <ul class="link-list">
-              {articles.map((a: any) => (
-                <li><a href={a.url} target="_blank" rel="noopener">{a.title}</a></li>
-              ))}
-            </ul>
-            {articlesSeeMore && (
-              <a href={articlesSeeMore} target="_blank" rel="noopener" class="see-more-link">See more &rarr;</a>
-            )}
           </div>
         </section>
       )}

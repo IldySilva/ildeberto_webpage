@@ -25,9 +25,28 @@ const posts = (await getCollection('blog'))
           <ul class="blog-list">
             {posts.map((post) => (
               <li class="blog-list__item">
-                <a href={`/blog/${post.id}`} class="blog-list__title">{post.data.title}</a>
+                <a 
+                  href={post.data.externalUrl || `/blog/${post.id}`} 
+                  class="blog-list__title"
+                  target={post.data.externalUrl ? "_blank" : undefined}
+                  rel={post.data.externalUrl ? "noopener noreferrer" : undefined}
+                >
+                  {post.data.title}
+                  {post.data.externalUrl && <i class="fas fa-external-link-alt" style="font-size: 0.7em; margin-left: 0.3rem; opacity: 0.7;" title="External Link"></i>}
+                </a>
                 <div class="blog-list__meta">
                   <span>{post.data.date.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                  &middot;
+                  <span style="display: inline-flex; align-items: center; gap: 0.3rem;">
+                    <i class="far fa-eye" style="opacity: 0.7;"></i>
+                    <span
+                      data-lyket-type="view"
+                      data-lyket-id={post.id}
+                      data-lyket-namespace="blog"
+                      data-lyket-template="minimal"
+                    >
+                    </span>
+                  </span>
                   {post.data.tags.length > 0 && (
                     <span class="post-tags">{post.data.tags.join(', ')}</span>
                   )}

@@ -5,10 +5,10 @@ interface Props {
   title: string;
   description?: string;
   date: Date;
-  tags?: string[];
+  postId: string;
 }
 
-const { title, description, date, tags = [] } = Astro.props;
+const { title, description, date, postId } = Astro.props;
 const formattedDate = date.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
@@ -17,17 +17,33 @@ const formattedDate = date.toLocaleDateString('en-GB', { year: 'numeric', month:
 
   <div id="page-wrapper">
     <div id="wrapper">
-      <section class="panel banner right">
-        <div class="content color0 span-4-25">
-          <a href="/" class="back-link">&larr; Home</a>
-          <a href="/blog" class="back-link" style="margin-top:0.4rem">&larr; Blog</a>
-        </div>
-      </section>
-
       <section class="panel">
         <div class="inner blog-post-content">
-          <p class="post-meta">{formattedDate}{tags.length > 0 && <span class="post-tags">{tags.join(', ')}</span>}</p>
+          <nav class="post-nav">
+            <a href="/" class="back-link" style="display:block">&larr; Home</a>
+            <a href="/blog" class="back-link" style="display:block">&larr; Blog</a>
+          </nav>
+          <p class="post-meta">
+            {formattedDate}
+            <span class="post-meta__views">
+              <i class="far fa-eye"></i>
+              <span
+                data-lyket-type="view"
+                data-lyket-id={postId}
+                data-lyket-namespace="blog"
+                data-lyket-template="minimal"
+              ></span>
+            </span>
+          </p>
           <h1 class="major">{title}</h1>
+          <div class="post-clap">
+            <span
+              data-lyket-type="clap"
+              data-lyket-id={postId}
+              data-lyket-namespace="blog"
+              data-lyket-template="minimal"
+            ></span>
+          </div>
           <slot />
         </div>
       </section>
