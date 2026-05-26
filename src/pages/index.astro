@@ -25,95 +25,96 @@ const blogPosts = (await getCollection('blog'))
   <canvas id="bg-canvas"></canvas>
 
   <div id="page-wrapper">
-    <div id="wrapper">
+
+    <main class="container">
 
       <!-- Hero -->
-      <section class="panel banner right">
-        <div class="content color0 span-4-25">
-          <h1 class="major">Hello, I'm<br />Ildeberto</h1>
-          <p set:html={hero.bio}></p>
-          <div class="socials">
-            {hero.socials.map((s: any) => (
-              <a href={s.url} target="_blank" rel="noopener">{s.label}</a>
-            ))}
-          </div>
-        </div>
+      <section class="hero">
+        <h1>Ildeberto Vasconcelos</h1>
+        <p set:html={hero.bio}></p>
+        <nav class="hero-links">
+          {hero.socials.map((s: any) => (
+            <a href={s.url} target="_blank" rel="noopener">{s.label}</a>
+          ))}
+        </nav>
       </section>
 
       <!-- Projects -->
-      <section class="panel">
-        <div class="inner">
-          <h2 class="major">Projects</h2>
-          <ul class="project-list">
-            {projects.map((p: any) => (
-              <li>
+      <section class="content-section">
+        <p class="section-label">Projects</p>
+        <ul class="project-list">
+          {projects.map((p: any) => (
+            <li class="project-item">
+              <div class="project-item__header">
                 <strong>
-                  {p.url ? <a href={p.url} target="_blank" rel="noopener">{p.name}</a> : p.name}
+                  {p.url
+                    ? <a href={p.url} target="_blank" rel="noopener">{p.name}</a>
+                    : p.name}
                 </strong>
-                {' '}&mdash;{' '}{p.description}
-                {p.tags && <span class="project-tags">{p.tags.join(', ')}</span>}
-              </li>
-            ))}
-          </ul>
-        </div>
+                {p.tags && <span class="project-tags">{p.tags.join(' · ')}</span>}
+              </div>
+              <p class="project-desc">{p.description}</p>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <!-- Articles (Medium) -->
       {articles.length > 0 && (
-        <section class="panel">
-          <div class="inner">
-            <h2 class="major">Articles</h2>
-            <ul class="link-list">
-              {articles.map((a: any) => (
-                <li><a href={a.url} target="_blank" rel="noopener">{a.title}</a></li>
-              ))}
-            </ul>
-            {articlesSeeMore && (
-              <a href={articlesSeeMore} target="_blank" rel="noopener" class="see-more-link">See more &rarr;</a>
-            )}
-          </div>
+        <section class="content-section">
+          <p class="section-label">Articles</p>
+          <ul class="link-list">
+            {articles.map((a: any) => (
+              <li>
+                <a href={a.url} target="_blank" rel="noopener">{a.title}</a>
+              </li>
+            ))}
+          </ul>
+          {articlesSeeMore && (
+            <a href={articlesSeeMore} target="_blank" rel="noopener" class="see-more-link">
+              See more &rarr;
+            </a>
+          )}
         </section>
       )}
 
       <!-- Blog posts -->
       {blogPosts.length > 0 && (
-        <section class="panel">
-          <div class="inner">
-            <h2 class="major">Writing</h2>
-            <ul class="link-list">
-              {blogPosts.map((post) => (
-                <li>
-                  <a href={`/blog/${post.id}`}>{post.data.title}</a>
-                  <span class="post-tags" style="margin-left:0.5rem">
-                    {post.data.date.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' })}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <a href="/blog" class="see-more-link">All posts &rarr;</a>
-          </div>
+        <section class="content-section">
+          <p class="section-label">Writing</p>
+          <ul class="link-list">
+            {blogPosts.map((post) => (
+              <li>
+                <a href={`/blog/${post.id}`}>{post.data.title}</a>
+                <span class="post-tags">
+                  {post.data.date.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' })}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <a href="/blog" class="see-more-link">All posts &rarr;</a>
         </section>
       )}
 
       <!-- Education & Languages -->
-      <section class="panel">
-        <div class="inner">
-          <ul class="journey-list">
-            {education.map((e: any) => (
-              <li><strong>{e.degree}</strong>, {e.institution} &middot; {e.period}</li>
-            ))}
-            {languages.length > 0 && (
-              <li><strong>Languages</strong> &mdash; {languages.join(', ')}</li>
-            )}
-          </ul>
-        </div>
+      <section class="content-section">
+        <p class="section-label">Background</p>
+        <ul class="journey-list">
+          {education.map((e: any) => (
+            <li><strong>{e.degree}</strong>, {e.institution} &middot; {e.period}</li>
+          ))}
+          {languages.length > 0 && (
+            <li><strong>Languages</strong> &mdash; {languages.join(', ')}</li>
+          )}
+        </ul>
       </section>
 
       <div class="copyright">&copy; Ildeberto Silva.</div>
-    </div>
+
+    </main>
   </div>
 
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀</button>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">&#9788;</button>
 
   <button class="stack-btn" id="stack-btn">Stack</button>
   <div class="stack-overlay" id="stack-overlay"></div>
@@ -137,19 +138,19 @@ const blogPosts = (await getCollection('blog'))
       Shape.prototype.reset = function (initial) {
         this.x = Math.random() * W;
         this.y = initial ? Math.random() * H : (Math.random() < 0.5 ? -120 : H + 120);
-        this.r = 40 + Math.random() * 120;
-        this.vx = (Math.random() - 0.5) * 0.18;
-        this.vy = (Math.random() - 0.5) * 0.18;
-        this.alpha = 0.12 + Math.random() * 0.18;
+        this.r = 40 + Math.random() * 100;
+        this.vx = (Math.random() - 0.5) * 0.12;
+        this.vy = (Math.random() - 0.5) * 0.12;
+        this.alpha = 0.04 + Math.random() * 0.06;
         this.type = Math.random() < 0.5 ? 'circle' : 'rect';
         this.rot = Math.random() * Math.PI * 2;
-        this.rotSpeed = (Math.random() - 0.5) * 0.002;
+        this.rotSpeed = (Math.random() - 0.5) * 0.001;
       };
       Shape.prototype.draw = function () {
         ctx.save();
         ctx.globalAlpha = this.alpha;
         ctx.strokeStyle = document.body.classList.contains('light') ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)';
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 1;
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rot);
         if (this.type === 'circle') { ctx.beginPath(); ctx.arc(0, 0, this.r, 0, Math.PI * 2); ctx.stroke(); }
@@ -160,7 +161,7 @@ const blogPosts = (await getCollection('blog'))
         this.x += this.vx; this.y += this.vy; this.rot += this.rotSpeed;
         if (this.x < -200 || this.x > W + 200 || this.y < -200 || this.y > H + 200) this.reset(false);
       };
-      function init() { resize(); shapes = Array.from({ length: 18 }, function () { return new Shape(); }); }
+      function init() { resize(); shapes = Array.from({ length: 14 }, function () { return new Shape(); }); }
       function loop() { ctx.clearRect(0, 0, W, H); shapes.forEach(function (s) { s.update(); s.draw(); }); requestAnimationFrame(loop); }
       window.addEventListener('resize', resize);
       init(); loop();

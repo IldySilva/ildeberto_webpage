@@ -10,12 +10,12 @@ const {
 } = Astro.props;
 ---
 
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <title>{title}</title>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="Ildeberto Vasconcelos" />
   <meta name="keywords" content="Flutter, Mobile, Programmer, Developer, Software Flutter Developer" />
   <meta name="description" content={description} />
@@ -23,14 +23,8 @@ const {
   <link rel="stylesheet" href="/assets/css/main.css" />
   <script is:inline src="https://kit.fontawesome.com/a6bb187d37.js" crossorigin="anonymous"></script>
   <script is:inline defer src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=pt_b853182d91a25ae5fe338f1ea89402"></script>
-  <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 </head>
-<body class="is-preload">
+<body>
   <slot />
-
-  <script is:inline src="/assets/js/jquery.min.js"></script>
-  <script is:inline src="/assets/js/browser.min.js"></script>
-  <script is:inline src="/assets/js/breakpoints.min.js"></script>
-  <script is:inline src="/assets/js/main.js"></script>
 </body>
 </html>
