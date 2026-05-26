@@ -13,6 +13,10 @@ hero:
       url: https://wa.link/o9wcx9
 
 projects:
+  - name: Xell
+    url: https://xell.pro/
+    description: Open-source SSH workspace for managing multiple servers — founder project
+    tags: [SSH, DevOps, Open Source]
   - name: CastBrick
     url: https://castbrick.co
     description: Email & SMS API for developers — founder project
@@ -33,14 +37,6 @@ projects:
     url: https://github.com/dart-lang/site-www
     description: Contributor to dart-lang/site-www, dart-lang/sdk, and flutter/flutter
     tags: [Dart, Flutter, Open Source]
-  - name: Njila Yetu
-    url: ""
-    description: Mobile app connecting Angolan communities
-    tags: [Flutter, Figma]
-  - name: Socia
-    url: ""
-    description: Social platform mobile app
-    tags: [Flutter]
 
 articles:
   see_more: https://ildysilva.medium.com
