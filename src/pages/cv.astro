@@ -1,0 +1,249 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="CV | Ildeberto Vasconcelos" description="Curriculum vitae of Ildeberto Vasconcelos, software engineer and technical lead.">
+  <main class="cv-page">
+    <a class="back-link" href="/">← Back to home</a>
+
+    <article class="cv-card">
+      <header class="cv-header">
+        <div>
+          <p class="eyebrow">Curriculum Vitae</p>
+          <h1>Ildeberto Vasconcelos</h1>
+          <p class="lead">Software engineer specializing in backend systems, mobile applications, and distributed architectures.</p>
+        </div>
+        <ul class="contact-list">
+          <li><a href="mailto:ildeberto34@gmail.com">ildeberto34@gmail.com</a></li>
+          <li>Remote</li>
+          <li><a href="https://ildeberto.xyz/" target="_blank" rel="noopener">ildeberto.xyz</a></li>
+          <li><a href="https://linkedin.com/in/ildeberto" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/ildysilva" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </header>
+
+      <section>
+        <h2>Summary</h2>
+        <p>Software Engineer specializing in backend systems, mobile applications, and distributed architectures. Strong experience in .NET (C#), Python, Go, and Flutter/Dart, building production systems for government, fintech, and telecom sectors. Focused on scalable APIs, event-driven architectures, and data-intensive systems with analytics and AI-adjacent capabilities such as embeddings integration and search infrastructure design. Proven leadership in cross-functional teams and end-to-end delivery ownership. Top-18 contributor to dart-lang/site-www out of 429 contributors, acknowledged in official Dart release changelogs.</p>
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        <ul class="bullets">
+          <li><strong>Backend & Distributed Systems:</strong> .NET C# (ASP.NET Core, CQRS, DDD), Python automation and scripting, Go (microservices, proxies, high-throughput systems), REST APIs, WebSockets, SMPP integrations, event-driven architectures.</li>
+          <li><strong>Data & AI-Adjacent Systems:</strong> Event streaming patterns, observability pipelines, analytics-ready system design, embeddings integration, vector search exposure, metadata enrichment systems.</li>
+          <li><strong>Mobile (Flutter/Dart):</strong> Flutter architecture, BLoC/MVVM, performance optimization, isolate-based concurrency, cross-platform development.</li>
+          <li><strong>Frontend:</strong> React, TypeScript, Svelte, component-driven UI architecture.</li>
+          <li><strong>Architecture & Platforms:</strong> SDK design, modular systems, API platform design, message-driven systems, offline-first architectures.</li>
+          <li><strong>Infrastructure & DevOps:</strong> Docker (Swarm), Traefik, Linux/Ubuntu, CI/CD pipelines, GitHub Actions, Dokploy.</li>
+          <li><strong>Databases:</strong> PostgreSQL, Redis, Firebase.</li>
+          <li><strong>Languages:</strong> English (C1 — Proficient), Portuguese (Native).</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Experience</h2>
+
+        <div class="job">
+          <div class="job-header">
+            <h3>Principal Mobile Engineer / Technical Lead</h3>
+            <span>TIS · Remote / Hybrid · Nov 2024 – Present</span>
+          </div>
+          <ul class="bullets">
+            <li>Led mobile engineering efforts defining architecture standards, scalability patterns, and delivery processes for Flutter-based products.</li>
+            <li>Acted as technical project owner and translated client requirements into engineering execution plans and delivery milestones.</li>
+            <li>Designed modular Flutter architecture and reusable component systems across multiple products.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-header">
+            <h3>Mobile & Full-Stack Engineer</h3>
+            <span>Equilibrium SA · Remote · May 2024 – Dec 2024</span>
+          </div>
+          <ul class="bullets">
+            <li>Developed the official Flutter application for the Presidency of the Republic of Angola.</li>
+            <li>Built modular cross-platform applications with backend integration and real-time communication layers.</li>
+            <li>Implemented WebSockets-based features, offline-first sync, and media-heavy workflows.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-header">
+            <h3>Software Engineer / Team Lead</h3>
+            <span>IS4 Solutions · Remote / Hybrid · Sep 2022 – May 2024</span>
+          </div>
+          <ul class="bullets">
+            <li>Designed and maintained production .NET C# backend systems using CQRS and layered architecture.</li>
+            <li>Built scalable REST APIs consumed by mobile and web clients.</li>
+            <li>Led engineering team activities including code reviews, sprint planning, and architecture discussions.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Projects</h2>
+        <div class="project">
+          <h3><a href="https://castbrick.co" target="_blank" rel="noopener">CastBrick</a></h3>
+          <p>Developer-first SMS & Email API platform for Sub-Saharan Africa.</p>
+        </div>
+        <div class="project">
+          <h3><a href="https://izipay.ao" target="_blank" rel="noopener">IziPay</a></h3>
+          <p>Local payment gateway and financial integration platform.</p>
+        </div>
+        <div class="project">
+          <h3><a href="https://nexactf.com" target="_blank" rel="noopener">NexaCTF</a></h3>
+          <p>Cybersecurity learning platform focused on Capture The Flag challenges.</p>
+        </div>
+        <div class="project">
+          <h3><a href="https://simplifica.gov.ao" target="_blank" rel="noopener">Simplifica</a></h3>
+          <p>Government digital transformation platform for public services.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <p><strong>AIEC</strong> · BSc in Computer Science · 2022–2025</p>
+      </section>
+    </article>
+  </main>
+
+  <style>
+    :global(body) {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .cv-page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 3rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: inherit;
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    .back-link:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    .cv-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .cv-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-bottom: 0.25rem;
+    }
+
+    .lead {
+      max-width: 650px;
+      opacity: 0.9;
+      margin-top: 0.5rem;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.35rem;
+      min-width: 220px;
+    }
+
+    .contact-list a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .contact-list a:hover {
+      text-decoration: underline;
+    }
+
+    h2 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.15rem;
+    }
+
+    h3 {
+      margin-bottom: 0.2rem;
+    }
+
+    .bullets {
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .job {
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .job:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.35rem;
+      opacity: 0.95;
+    }
+
+    .job-header span {
+      opacity: 0.75;
+      font-size: 0.95rem;
+    }
+
+    .project {
+      margin-top: 0.8rem;
+    }
+
+    .project a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .project a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .cv-page {
+        padding: 1rem 0.8rem 2rem;
+      }
+
+      .cv-card {
+        padding: 1.2rem;
+      }
+    }
+  </style>
+</BaseLayout>

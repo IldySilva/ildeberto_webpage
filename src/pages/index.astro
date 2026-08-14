@@ -34,6 +34,7 @@ const blogPosts = (await getCollection('blog'))
           {hero.socials.map((s: any) => (
             <a href={s.url} target="_blank" rel="noopener">{s.label}</a>
           ))}
+          <a href="/cv">CV</a>
         </nav>
       </section>
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><title>Extension Types in Dart 3.3 — Ildeberto</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="Ildeberto Vasconcelos"><meta name="keywords" content="Flutter, Mobile, Programmer, Developer, Software Flutter Developer"><meta name="description" content="Zero-cost wrappers that bring type safety without runtime overhead."><link rel="icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="/assets/css/main.css"><script src="https://kit.fontawesome.com/a6bb187d37.js" crossorigin="anonymous"></script><script defer src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=pt_b853182d91a25ae5fe338f1ea89402"></script></head> <body>  <canvas id="bg-canvas"></canvas> <div id="page-wrapper"> <main class="container"> <section class="content-section" style="border-bottom:none"> <div class="blog-post-content"> <nav class="post-nav"> <a href="/" class="back-link">&larr; Home</a> <a href="/blog" class="back-link">&larr; Blog</a> </nav> <p class="post-meta"> 1 May 2024 <span class="post-meta__views"> <i class="far fa-eye"></i> <span data-lyket-type="view" data-lyket-id="extension-types-dart" data-lyket-namespace="blog" data-lyket-template="minimal"></span> </span> </p> <h1>Extension Types in Dart 3.3</h1> <div class="post-clap"> <span data-lyket-type="clap" data-lyket-id="extension-types-dart" data-lyket-namespace="blog" data-lyket-template="minimal"></span> </div>  <p>Dart 3.3 introduced <strong>extension types</strong> — a way to wrap an existing type and give it a
+<!DOCTYPE html><html lang="en"> <head><title>Extension Types in Dart 3.3 — Ildeberto</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="Ildeberto Vasconcelos"><meta name="keywords" content="Flutter, Mobile, Programmer, Developer, Software Flutter Developer"><meta name="description" content="Zero-cost wrappers that bring type safety without runtime overhead."><link rel="icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="/assets/css/main.css"><script src="https://kit.fontawesome.com/a6bb187d37.js" crossorigin="anonymous"></script><script defer src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=pt_b853182d91a25ae5fe338f1ea89402"></script></head> <body>  <div id="page-wrapper"> <main class="container"> <section class="content-section" style="border-bottom:none"> <div class="blog-post-content"> <nav class="post-nav"> <a href="/" class="back-link">&larr; Home</a> <a href="/blog" class="back-link">&larr; Blog</a> </nav> <p class="post-meta"> 1 May 2024 <span class="post-meta__views"> <i class="far fa-eye"></i> <span data-lyket-type="view" data-lyket-id="extension-types-dart" data-lyket-namespace="blog" data-lyket-template="minimal"></span> </span> </p> <h1>Extension Types in Dart 3.3</h1> <div class="post-clap"> <span data-lyket-type="clap" data-lyket-id="extension-types-dart" data-lyket-namespace="blog" data-lyket-template="minimal"></span> </div>  <p>Dart 3.3 introduced <strong>extension types</strong> — a way to wrap an existing type and give it a
 different interface, with zero runtime overhead.</p>
 <h2 id="why-they-matter">Why they matter</h2>
 <p>Before extension types, a common pattern was:</p>
@@ -35,44 +35,6 @@ wrapper object, no allocation, no overhead.</p>
 </ul>
 <p>Extension types are a lightweight alternative to full wrapper classes when you only need
 type safety, not behavioural extension.</p>  </div> </section> <div class="copyright">&copy; Ildeberto Silva.</div> </main> </div> <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">&#9788;</button> <script>
-    (function () {
-      const canvas = document.getElementById('bg-canvas');
-      const ctx = canvas.getContext('2d');
-      let W, H, shapes;
-      function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-      function Shape() { this.reset(true); }
-      Shape.prototype.reset = function (initial) {
-        this.x = Math.random() * W;
-        this.y = initial ? Math.random() * H : (Math.random() < 0.5 ? -120 : H + 120);
-        this.r = 40 + Math.random() * 100;
-        this.vx = (Math.random() - 0.5) * 0.12;
-        this.vy = (Math.random() - 0.5) * 0.12;
-        this.alpha = 0.04 + Math.random() * 0.06;
-        this.type = Math.random() < 0.5 ? 'circle' : 'rect';
-        this.rot = Math.random() * Math.PI * 2;
-        this.rotSpeed = (Math.random() - 0.5) * 0.001;
-      };
-      Shape.prototype.draw = function () {
-        ctx.save();
-        ctx.globalAlpha = this.alpha;
-        ctx.strokeStyle = document.body.classList.contains('light') ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)';
-        ctx.lineWidth = 1;
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.rot);
-        if (this.type === 'circle') { ctx.beginPath(); ctx.arc(0, 0, this.r, 0, Math.PI * 2); ctx.stroke(); }
-        else { ctx.strokeRect(-this.r / 2, -this.r / 2, this.r, this.r); }
-        ctx.restore();
-      };
-      Shape.prototype.update = function () {
-        this.x += this.vx; this.y += this.vy; this.rot += this.rotSpeed;
-        if (this.x < -200 || this.x > W + 200 || this.y < -200 || this.y > H + 200) this.reset(false);
-      };
-      function init() { resize(); shapes = Array.from({ length: 14 }, function () { return new Shape(); }); }
-      function loop() { ctx.clearRect(0, 0, W, H); shapes.forEach(function (s) { s.update(); s.draw(); }); requestAnimationFrame(loop); }
-      window.addEventListener('resize', resize);
-      init(); loop();
-    })();
-
     (function () {
       const btn = document.getElementById('theme-toggle');
       const saved = localStorage.getItem('theme');
